@@ -15,11 +15,30 @@ jQuery(function() {
 		
 		var poll	= $('input[name=poll]').val(),
 			answer	= $('input[name=answer]:checked').val(),
-			div		= $(this).parent(),
+			elem		= $(this),
+			div			= $(this).parent(),
 			action	= $(this).attr('action');
 
-		$(this).slideUp('slow', function() {
-			updatePoll(action, poll, answer);
+		// Get the transition speed
+		$.ajax({
+			type:	'POST',
+			url:	spAjax.url,
+			data: {
+						action:					'spAjaxSubmit',
+						option_name:		'sp_transition_speed',
+						form_action:		'get_option_value'
+						},
+			dataType: 'json',
+			success: function(response)
+				{
+				if(response != '-1')
+					{
+      		transition_speed = parseInt(response.option_value);
+      		elem.slideUp(transition_speed, function() {
+						updatePoll(action, poll, answer);
+					});
+					}
+				}
 		});
 	}
 

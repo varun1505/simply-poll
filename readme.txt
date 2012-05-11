@@ -57,6 +57,7 @@ A Yes there intact is! It's on [Github](https://github.com/WolfieZero/simply-pol
 = 1.5 =
 * Added an icon to the administration link
 * Added a widget that allows you to choose a poll to display
+* Added the option to change the transition speed
 
 = 1.4 =
 
