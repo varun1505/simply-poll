@@ -37,7 +37,7 @@ class SimplyPollAdmin extends SimplyPoll{
 		$capability = 'manage_options';
 		$parentPage = 'sp-poll';
 		
-		add_menu_page('Simply Poll', 'Polls', $capability, $parentPage, array($this, 'getAdminPageMain'),'', 6);
+		add_menu_page('Simply Poll', 'Polls', $capability, $parentPage, array($this, 'getAdminPageMain'), plugins_url('/img/icon-poll.png',			dirname(__FILE__)), 10);
 		
 		add_submenu_page($parentPage,	__('Settings'),		__('Settings'),		$capability,	'sp-settings',	array($this, 'getAdminPageSettings'));
 		add_submenu_page($parentPage,	__('Add New Poll'), __('Add New'),		$capability,	'sp-add',		array($this, 'getAdminPageAdd'));
