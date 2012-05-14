@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Simply Poll
-Version: 1.4
+Version: 1.5
 Plugin URI: http://wolfiezero.com/wordpress/simply-poll/
 Description: Simply, it adds polling functionailty to your WordPress site
 Author: WolfieZero
@@ -12,6 +12,7 @@ require_once('config.php');
 require_once('lib/logger.php');
 require_once('lib/simplypoll.php');
 require_once('lib/db.php');
+require_once('lib/widget.php');
 
 global $logger;
 $logger = new Logger(dirname(__FILE__).'/', SP_DEBUG);

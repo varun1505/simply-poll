@@ -1,11 +1,11 @@
 === Simply Poll ===
 
-Contributors: wolfiezero, olliea95, Fubra
+Contributors: wolfiezero, olliea95, Fubra, Seriouslysean
 Donate link: http://wolfiezero.com/donate/
 Tags: poll, results, polls, polling, survey, simple, easy, quiz
 Requires at least: 3.0
 Tested up to: 3.2.1
-Stable tag: 1.4β
+Stable tag: 1.5
 
 Simply, it adds polling functionality to your WordPress site
 
@@ -53,6 +53,11 @@ A Yes there intact is! It's on [Github](https://github.com/WolfieZero/simply-pol
 
 
 == Changelog ==
+
+= 1.5 =
+* Added an icon to the administration link
+* Added a widget that allows you to choose a poll to display
+* Added the option to change the transition speed
 
 = 1.4 =
 

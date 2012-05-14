@@ -1,6 +1,26 @@
 <?php
 global $wp, $logger;
 
+// Is this a different request?
+if(isset($_POST['form_action']))
+	{
+	switch($_POST['form_action'])
+  	{
+  	case 'get_option_value':
+    	$option_value = get_option($_POST['option_name']);
+    	if($option_value !== false)
+    		echo json_encode(array('option_name' => $_POST['option_name'], 'option_value' => $option_value));
+    	else
+    		echo '-1';
+    	break;
+
+  	default:
+    	echo '-1';
+    	break;
+  	}
+  exit;
+	}
+
 // Check if poll is set (also can be used to check for direct access)
 if( isset($_POST['poll']) ) {
 
