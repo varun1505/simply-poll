@@ -88,8 +88,7 @@ class SimplyPollAdmin extends SimplyPoll{
 		$editPoll		= false;
 		
 		// Check to see if all required fields are entered
-		
-		
+
 		// Does question have a value?
 		if( $question ) {
 			
@@ -106,10 +105,9 @@ class SimplyPollAdmin extends SimplyPoll{
 		if( $answers ) {
 			
 			$cntAnswers = 0;
-			
-			// Sort the data out
+
 			foreach($answers as $key => $answer) {
-				
+
 				// Unset either way to clean the array
 				unset($pollData['answers'][$key]); 
 					
@@ -117,22 +115,14 @@ class SimplyPollAdmin extends SimplyPoll{
 					// We have an answer so build that back into the array with new values
 					++$cntAnswers;
 					
-					// Add vote node if not there already
-					if(isset($answer['vote'])){
-						$vote = $answer['vote'];
-					} else {
-						$vote = 0;
-					}
-					
 					$pollForDB['answers'][$cntAnswers]['answer']	= htmlspecialchars( stripcslashes($answer['answer']), ENT_QUOTES, get_bloginfo('charset') );
-					$pollForDB['answers'][$cntAnswers]['vote']		= $vote;
+					$pollForDB['answers'][$cntAnswers]['vote']		= intval($answer['vote']);
 					$pollForDS['answers'][$cntAnswers]['answer']	= stripcslashes($answer['answer']);
-					$pollForDS['answers'][$cntAnswers]['vote']		= $vote;
 					
 				}
 					
 			}
-			
+
 			// Quick clean of the array node
 			unset($pollData['answers']);
 			
@@ -192,7 +182,7 @@ class SimplyPollAdmin extends SimplyPoll{
 		$pollData	= parent::pollDB()->getPollDB();
 		
 		$poll['active']		= true;
-		$poll['totalvotes']	= 0;
+		$poll['totalvotes']	= $this->countPollVotes($poll);
 		$poll['time']		= time();
 		
 		$pollData['polls'][] = $poll;
@@ -207,4 +197,24 @@ class SimplyPollAdmin extends SimplyPoll{
 			return parent::pollDB()->updatePollDB($poll);
 		}
 	}
+
+
+
+	/**
+	 * Count the votes of the poll
+	 * 
+	 * @param	array	$poll
+	 * @return	int
+	 *************************************************************************/
+	private function countPollVotes($poll){
+
+	$totalVotes = 0;
+	if($poll['answers'])
+		{
+		foreach($poll['answers'] as $key => $answer) $totalVotes += intval($answer['vote']);
+		}
+	return $totalVotes;
+
+	}	
+		
 }

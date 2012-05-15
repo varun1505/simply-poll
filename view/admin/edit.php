@@ -6,7 +6,7 @@
 	if( $_GET['page'] == 'sp-add' ) {
 		
 		$poll					= $_POST;
-		$formData['display']	= 'Add Poll';
+		$formData['display']	= __('Add Poll');
 		
 	} elseif( $_GET['page'] == 'sp-update' ) {
 		
@@ -78,7 +78,7 @@
 						if( isset($poll['answers']) ) {
 							$limit = count($poll['answers']);
 						} else {
-							$limit = 10;
+							$limit = 2;
 						}
 					
 						for( $i=1; $i<=$limit; ++$i ) {
@@ -93,9 +93,16 @@
 								$class	= 'required';
 							
 							if( isset($poll['answers'][$i]['vote']) )
+								$vote	= $poll['answers'][$i]['vote'];
+
+							if( isset($poll['answers'][$i]['vote']) )
 								$votes	= 'votes: <strong>'.$poll['answers'][$i]['vote'].'</strong>';
 							
-							echo '<li><input type="text" name="answers['.$i.'][answer]" size="50" value="'.$answer.'" class="'.$class.'" /> '.$votes.'</li>';
+							echo '<li>';
+								echo '<input type="hidden" name="answers['.$i.'][vote]" value="'.$vote.'" class="pollvotes" id="pollvotes-'.$i.'" />';
+								echo '<input type="text" name="answers['.$i.'][answer]" size="50" value="'.$answer.'" class="pollanswers '.$class.'" id="pollanswers-'.$i.'" />';
+								echo $votes;
+							echo '</li>';
 						}
 					?>
 				</ul>
