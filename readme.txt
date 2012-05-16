@@ -5,7 +5,7 @@ Donate link: http://wolfiezero.com/donate/
 Tags: poll, results, polls, polling, survey, simple, easy, quiz
 Requires at least: 3.0
 Tested up to: 3.2.1
-Stable tag: 1.5
+Stable tag: 1.5.1
 
 Simply, it adds polling functionality to your WordPress site
 
@@ -53,6 +53,10 @@ A Yes there intact is! It's on [Github](https://github.com/WolfieZero/simply-pol
 
 
 == Changelog ==
+
+= 1.5.1 =
+* Fixed a bug that destoyed all votes when updating a poll
+* Added the ability to add/remove any number of questions to a poll
 
 = 1.5 =
 * Added an icon to the administration link

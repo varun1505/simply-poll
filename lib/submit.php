@@ -30,6 +30,7 @@ if( isset($_POST['poll']) ) {
 	$pollID		= (int)$_POST['poll'];
 	$simplyPoll	= new SimplyPoll();	
 	$answer		= null;
+	$other		= null;
 	
 	
 	// A vote has been made
@@ -38,6 +39,7 @@ if( isset($_POST['poll']) ) {
 		$logger->log('The int `'.$_POST['answer'].'` has been accepted');
 		
 		$answer = $_POST['answer'];
+		if($answer === '0') $other = $_POST['other']; // Set the other answer if 'other' was chosen
 	
 		// Check if we have the 'sptaken' cookie before trying to get data
 		if(isset($_COOKIE['sptaken']))
@@ -45,7 +47,7 @@ if( isset($_POST['poll']) ) {
 		else
 			$taken	= null;
 
-		$taken		= unserialize($taken);	// Unsearlize $taken to get an array
+		$taken		= unserialize($taken);	// Unserialize $taken to get an array
 		$taken[]	= $pollID;				// Add this poll's ID to the $taken array
 		$taken		= serialize($taken);	// Serialize $taken array ready to be stored again
 		
@@ -59,7 +61,7 @@ if( isset($_POST['poll']) ) {
 	if( !isset($_POST['backurl']) ) {
 		
 		$return = array(
-			'answer'	=> $simplyPoll->submitPoll($pollID, $answer), // This function will add the results
+			'answer'	=> $simplyPoll->submitPoll($pollID, $answer, $other), // This function will add the results
 			'pollid'	=> $pollID
 		);
 		$json = json_encode($return);

@@ -65,7 +65,9 @@ class SimplyPollDB {
 				`'.SP_TABLE.'` 
 			SET 
 				`question`	= \''.$pollData['question'].'\',
-				`answers`	= \''.mysql_escape_string($answers).'\', 
+				`answers`	= \''.mysql_escape_string($answers).'\',
+				`answersother`	= \''.mysql_escape_string($pollData['answersother']).'\',
+				`totalvotes`	= \''.mysql_escape_string($pollData['totalvotes']).'\', 
 				`updated`	= \''.(int)$pollData['time'].'\'
 			WHERE 
 				`id`		= '.$pollData['id'].'

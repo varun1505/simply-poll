@@ -26,6 +26,17 @@
 					</li>
 					
 				<?php endforeach; ?>
+
+				<?php if($answersother == '1') : ?>
+					<li class="sp-item">
+						<input type="radio" name="answer" value="0" id="poll-<?php echo $pollid; ?>-0" class="sp-input-radio" />
+						<label for="poll-<?php echo $pollid; ?>-0" class="sp-label sp-label-other">
+							<span class="sp-input-other-text">Other</span>
+							<input type="text" name="answer-other" value="" id="poll-<?php echo $pollid; ?>-0-other" class="sp-input-other" />
+						</label>
+					</li>
+				<?php endif; ?>
+
 				</ul>
 			</fieldset>
 		

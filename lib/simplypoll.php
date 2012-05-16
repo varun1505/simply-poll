@@ -54,6 +54,7 @@ class SimplyPoll {
 			if( isset($poll['question']) ) {
 				$question	= stripcslashes($poll['question']);
 				$answers	= $poll['answers'];
+				$answersother = $poll['answersother'];
 				$totalvotes = $poll['totalvotes'];
 				
 				foreach( $answers as $key => $answer ) {
@@ -98,9 +99,9 @@ class SimplyPoll {
 	 * @param int $answer
 	 * @return int
 	 */
-	public function submitPoll($pollID, $answer=null) {
+	public function submitPoll($pollID, $answer=null, $other=null) {
 		
-		global $logger;
+		global $spAdmin, $logger;
 	
 		// The user has provided an answer
 		if( isset($answer) ) {
@@ -108,12 +109,48 @@ class SimplyPoll {
 			$poll = $this->grabPoll($pollID); // Grab the current results
 			
 			$totalVotes = 0;
+
+			// Code to add a new answer if the enable other option is set and
+			// a custom answer was given
+			if($answer === '0' && !empty($other) && $poll['answersother'] === '1')
+				{
+				$newPoll = $poll;
+				// Get the new question's ID
+				$newKey	= false;
+				// Check to see if this question already exists
+				foreach($newPoll['answers'] as $key => $value)
+					{
+					if($other == $value['answer']) $newKey = $key;
+					// While we're looping, decode any url entities
+					$newPoll['answers'][$key]['answer'] = htmlspecialchars_decode($value['answer'], ENT_QUOTES);
+					}
+				// If a key isn't set, assume it's a new answer
+				if(!$newKey)
+					{
+					$newKey = (count($newPoll['answers'])+1);
+					// Add the new question to the poll object
+					$newPoll['answers'][$newKey] = array('answer' => $other, 'vote' => 0);
+					// Add the id to the poll object as 'polledit' so we know what to update
+					$newPoll['polledit']	= $pollID;
+					// Update the poll with the new answer
+					$updatePoll = $spAdmin->setEdit($newPoll);
+					if(!isset($updatePoll['return']['success']))
+						{
+						// If our update failed, set the key to 0 so this call fails
+						$newKey = 0;
+						}
+					}
+				// Set the key to the anser variable so the logic below continues to work
+				$answer	= $newKey;
+				// Set the poll back to our new poll variable to continue processing
+				$poll = $newPoll;
+				}
 			
 			// Verify answer is valid
 			if(empty($poll['answers'][$answer]))
-			{
+				{
 				return null;
-			}
+				}
 			
 			// Update the count of the answer
 			$current = $poll['answers'][$answer]['vote'];
