@@ -147,7 +147,7 @@ function spInstall() {
  * Updates the database to the correct version
  */
 function spDatabase() {
-	global $wpdb;
+	global $spAdmin, $wpdb;
 	$update = false;
 
 	// Check the database version
@@ -171,7 +171,7 @@ function spDatabase() {
 			$update = update_option('sp_version_database', '1.0');
 
 			// Call this function again in case there are multiple updates needed
-			if($update) $this->spDatabase();
+			if($update) $spAdmin->spDatabase();
 			break;
 		}
 }
