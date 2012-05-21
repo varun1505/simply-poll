@@ -5,7 +5,7 @@ Donate link: http://wolfiezero.com/donate/
 Tags: poll, results, polls, polling, survey, simple, easy, quiz
 Requires at least: 3.0
 Tested up to: 3.2.1
-Stable tag: 1.6
+Stable tag: 1.6.1
 
 Simply, it adds polling functionality to your WordPress site
 
@@ -53,6 +53,9 @@ A Yes there intact is! It's on [Github](https://github.com/WolfieZero/simply-pol
 
 
 == Changelog ==
+
+= 1.6.1 =
+* Fixed a bug with the pie chart that prevented it from displaying when an apostraphe was present in an answer
 
 = 1.6 =
 * Added a poll option to allow an 'other' field. When this is active it adds a field labeled other where users can put in their own answer to a poll. This will add it to the poll's answers and assign it a vote. If an answer is added that already exists, the existing answer get a vote instead.
