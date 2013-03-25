@@ -24,7 +24,7 @@
 			$(document).ready(function(){
 				var data = [
 					<?php foreach($answers as $key => $answer) : ?>
-						['<strong><?php echo $answer['answer']; ?></strong> <?php _e('votes'); ?>: <?php echo $answer['vote']; ?>', <?php echo $answer['vote']; ?>],
+						['<strong><?php echo addslashes($answer['answer']); ?></strong> <?php _e('votes'); ?>: <?php echo intval($answer['vote']); ?>', <?php echo $answer['vote']; ?>],
 					<?php endforeach; ?>
 				];
 				

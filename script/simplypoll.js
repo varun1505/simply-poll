@@ -16,6 +16,7 @@ jQuery(function() {
 		
 		var poll	= $('input[name=poll]').val(),
 			answer	= $('input[name=answer]:checked').val(),
+			other		= $('.sp-input-other').val(),
 			elem		= $(this),
 			div			= $(this).parent(),
 			action	= $(this).attr('action');
@@ -36,7 +37,7 @@ jQuery(function() {
 					{
       		transition_speed = parseInt(response.option_value);
       		elem.slideUp(transition_speed, function() {
-						updatePoll(action, poll, answer);
+						updatePoll(action, poll, answer, other);
 					});
 					}
 				}
@@ -135,7 +136,7 @@ jQuery(function() {
 	 * @param int pollID
 	 * @param int answer
 	 */
-	function updatePoll(action, pollID, answer) {
+	function updatePoll(action, pollID, answer, other) {
 		
 		var postData;
 
@@ -149,7 +150,9 @@ jQuery(function() {
 		} else {
 			postData = {
 				action:	'spAjaxSubmit',
-				poll:	pollID
+				poll:	pollID,
+				answer:	answer,
+				other: other
 			};
 		}
 		
@@ -175,7 +178,7 @@ jQuery(function() {
 	 * @param object data
 	 */
 	function displayResults(data) {
-		
+
 		var postData = {
 				action: 'spAjaxResults',
 				pollid: data.pollid

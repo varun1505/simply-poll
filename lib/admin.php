@@ -79,21 +79,23 @@ class SimplyPollAdmin extends SimplyPoll{
 	 *************************************************************************/
 	public function setEdit($pollData){
 		
-		$question		= $pollData['question'];
-		$answers		= $pollData['answers'];
-		$posted			= $pollData;
+		$question			= $pollData['question'];
+		$answers			= $pollData['answers'];
+		$answersother	= $pollData['answersother'];
+		$posted				= $pollData;
 		$countAnswers	= 0;
-		$error			= array();
-		$newPoll		= false;
-		$editPoll		= false;
+		$error				= array();
+		$newPoll			= false;
+		$editPoll			= false;
 		
 		// Check to see if all required fields are entered
 
 		// Does question have a value?
 		if( $question ) {
 			
-			$pollForDB['question'] = $question;
-			$pollForDS['question'] = htmlspecialchars( stripcslashes($question), ENT_QUOTES, get_bloginfo('charset') );
+			$pollForDB['question']	= $question;
+			$pollForDS['question']	= htmlspecialchars( stripcslashes($question), ENT_QUOTES, get_bloginfo('charset') );
+			$pollForDB['answersother']			= $answersother;
 			unset($pollData['question']);
 			
 		} else {

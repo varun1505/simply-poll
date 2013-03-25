@@ -116,6 +116,14 @@
 					$buttonValue = __('new');
 				}
 			?>
+
+			<p>
+				<label for="answersother">Enable or Disable the "other" option, allowing a user to create their own answer:</label><br />
+				<select name="answersother" id="answersother">
+					<option value="0"<?php echo ($poll['answersother'] == '0' ? ' selected="selected"' : ''); ?>>Disabled</option>
+					<option value="1"<?php echo ($poll['answersother'] == '1' ? ' selected="selected"' : ''); ?>>Enabled</option>
+				</select>
+			</p>
 			
 			<p><button type="submit" name="polledit" value="<?php echo $buttonValue; ?>" class="button-primary"><?php echo $formData['display']; ?></p>
 			

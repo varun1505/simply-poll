@@ -2,7 +2,7 @@
 
 global $wpdb;
 
-define('SP_VERSION',		'1.4');
+define('SP_VERSION',		'1.6.1');
 define('SP_DEBUG',			false);
 
 define('SP_DIR',			dirname(__FILE__).'/');
@@ -20,7 +20,7 @@ define('SP_DIRECT_ACCESS',	'I don\'t think you should be here?');
 define('SP_CSS_CLIENT',		plugins_url('view/client/simply-poll.css', __FILE__));
 define('SP_CSS_ADMIN',		plugins_url('view/admin/admin-simply-poll.css', __FILE__));
 define('SP_JS_CLIENT',		plugins_url('script/simplypoll.js', __FILE__));
-define('SP_JS_ADMIN',		plugins_url('script/simplypoll-admin.js', __FILE__));
+define('SP_JS_ADMIN',     plugins_url('script/simplypoll-admin.js', __FILE__));
 
 /* Default options */
 define('SP_OPTIONS_DEFAULT_SP_LIMIT',     'no');
@@ -28,3 +28,6 @@ add_option( 'sp_limit', SP_OPTIONS_DEFAULT_SP_LIMIT);
 
 define('SP_OPTIONS_DEFAULT_SP_TRANSITION_SPEED',    500);
 add_option( 'sp_transition_speed', SP_OPTIONS_DEFAULT_SP_TRANSITION_SPEED);
+
+/* Database version */
+define('SP_VERSION_DB',    '1.0');

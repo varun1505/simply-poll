@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Simply Poll
-Version: 1.5
+Version: 1.6.1
 Plugin URI: http://wolfiezero.com/wordpress/simply-poll/
 Description: Simply, it adds polling functionailty to your WordPress site
 Author: WolfieZero
@@ -25,7 +25,7 @@ if( !function_exists('add_action') ) {
 // Registers the activation hook - runs the install function when the plugin is activated
 register_activation_hook(__FILE__, 'spInstall');
 
-
+add_action('init', 'spDatabase');		// Check the database version and do any needed updates
 add_action('init', 'spFiles');		// Load the enqued files
 add_shortcode('poll', 'spClient');	// Load the poll for client view
 
@@ -139,4 +139,39 @@ function spInstall() {
 	$success = $wpdb->query($sql);
 
 	return $success;
+}
+
+
+/**
+ * Simply Poll Database Version Script
+ * Updates the database to the correct version
+ */
+function spDatabase() {
+	global $spAdmin, $wpdb;
+	$update = false;
+
+	// Check the database version
+	$version = get_option('sp_version_database');
+
+	// Run the upgrades
+	switch($version)
+		{
+		case SP_VERSION_DB:
+			// Latest version
+			break;
+
+		default:
+		case false:
+			// No database version exists, this is the original schema
+			// We need to add the other column to allow other answers
+			$sql = 'ALTER TABLE '.SP_TABLE.' ADD answersother TINYINT(1) AFTER answers;';
+			$success = $wpdb->query($sql);
+
+			// Update the database to this version
+			$update = update_option('sp_version_database', '1.0');
+
+			// Call this function again in case there are multiple updates needed
+			if($update) $spAdmin->spDatabase();
+			break;
+		}
 }
