@@ -1,7 +1,7 @@
 <?php
 $limit = get_option('sp_limit', SP_OPTIONS_DEFAULT_SP_LIMIT);
 $transition_speed = get_option('sp_transition_speed', SP_OPTIONS_DEFAULT_SP_TRANSITION_SPEED);
-if (isset($_POST['submit'])) {
+if (isset($_POST['submit']) && wp_verify_nonce($_POST['spcheck'], 'settings')) {
 	
 	$messageArray	= array();
 
@@ -49,6 +49,8 @@ if (isset($_POST['submit'])) {
 	<?php else : ?>
 		
 		<form method="post">
+			
+			<?php wp_nonce_field('settings', 'spcheck'); ?>
 			
 			<p><?php _e('Limit to one submission per computer'); ?>?</p>
 			<p><input type="radio" name="limit" value="yes" id="limityes" <?php if($limit == 'yes') { echo 'checked="checked"'; } ?> />&nbsp;<label for="limityes"><?php _e('Yes'); ?></label></p>

@@ -6,11 +6,11 @@
 	$id = (int)$_GET['id'];
 	$poll = $spAdmin->grabPoll($id);
 		
-	if(isset($_POST['reset']) && $_POST['reset'] == 'yes') {
+	if(isset($_POST['reset']) && $_POST['reset'] == 'yes' && wp_verify_nonce($_POST['spcheck'], 'reset')) {
 		$pollDB->resetPoll($poll);
 		$message = 'Poll reset';
 		
-	} elseif(isset($_POST['reset']) && $_POST['reset'] == 'no') {
+	} elseif(isset($_POST['reset']) && $_POST['reset'] == 'no' && wp_verify_nonce($_POST['spcheck'], 'reset')) {
 		$message = 'All poll votes are still intact';
 	}
 	
@@ -47,6 +47,8 @@
 			<p><?php _e('Are you sure you want to reset poll'); ?> "<strong><?php echo $poll['question']; ?></strong>"?</p>
 			
 			<form method="post">
+			
+				<?php wp_nonce_field('reset', 'spcheck'); ?>
 				
 				<input type="hidden" name="id" value="<?php echo $id; ?>" />
 				<p>

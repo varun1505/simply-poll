@@ -6,11 +6,11 @@
 	$id = (int)$_GET['id'];
 	$poll = $spAdmin->grabPoll($id);
 		
-	if(isset($_POST['delete']) && $_POST['delete'] == 'yes') {
+	if(isset($_POST['delete']) && $_POST['delete'] == 'yes' && wp_verify_nonce($_POST['spcheck'], 'delete')) {
 		$pollDB->deletePoll($_POST['id']);
 		$message = __('Poll deleted');
 		
-	} elseif(isset($_POST['delete']) && $_POST['delete'] == 'no') {
+	} elseif(isset($_POST['delete']) && $_POST['delete'] == 'no' && wp_verify_nonce($_POST['spcheck'], 'delete')) {
 		$message = __('Poll not deleted');
 	}
 	
@@ -45,6 +45,8 @@
 			<p><?php _e('Are you sure you want to delete poll'); ?> "<strong><?php echo $poll['question']; ?></strong>"?</p>
 			
 			<form method="post">
+			
+				<?php wp_nonce_field('delete', 'spcheck'); ?>
 				
 				<input type="hidden" name="id" value="<?php echo $id; ?>" />
 				<p>

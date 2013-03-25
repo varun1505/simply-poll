@@ -50,15 +50,13 @@
     .pollanswers-buttons .pollanswers-add.button-primary,
     .pollanswers-buttons .pollanswers-add.button-highlighted
         {
-        background-image: url('../../img/button-grad-green.png');
-        border-color: #1e851d;
+            margin: 0 5px;
         }
         .pollanswers-buttons .pollanswers-add:hover { opacity: .6; }
     .pollanswers-buttons .pollanswers-remove.button-primary,
     .pollanswers-buttons .pollanswers-remove.button-highlighted
         {
-        background-image: url('../../img/button-grad-red.png');
-        border-color: #851d26;
+            margin: 0 5px;
         }
         .pollanswers-buttons .pollanswers-remove:hover { opacity: .6; }
 

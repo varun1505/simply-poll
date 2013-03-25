@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Simply Poll
-Version: 1.6.1
+Version: 1.6.2
 Plugin URI: http://wolfiezero.com/wordpress/simply-poll/
 Description: Simply, it adds polling functionailty to your WordPress site
 Author: WolfieZero

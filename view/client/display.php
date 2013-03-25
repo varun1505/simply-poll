@@ -5,6 +5,7 @@
 	
 		<input type="hidden" name="poll" value="<?php echo $pollid; ?>" />
 		<input type="hidden" name="backurl" value="<?php echo $thisPage; ?>" />
+		<?php wp_nonce_field('submit', 'spcheck'); ?>
 		
 		<?php 
 			if ($userCannotTakePoll) :

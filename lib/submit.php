@@ -22,7 +22,7 @@ if(isset($_POST['form_action']))
 	}
 
 // Check if poll is set (also can be used to check for direct access)
-if( isset($_POST['poll']) ) {
+if( isset($_POST['poll']) && wp_verify_nonce($_POST['spcheck'], 'submit')) {
 
 	$logger->logVar($_POST, '$_POST');
 

@@ -2,7 +2,7 @@
 
 global $wpdb;
 
-define('SP_VERSION',		'1.6.1');
+define('SP_VERSION',		'1.6.2');
 define('SP_DEBUG',			false);
 
 define('SP_DIR',			dirname(__FILE__).'/');

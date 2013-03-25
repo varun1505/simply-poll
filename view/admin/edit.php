@@ -16,7 +16,7 @@
 		
 	}
 	
-	if( isset($_POST['polledit']) ) {
+	if( isset($_POST['polledit']) && wp_verify_nonce($_POST['spcheck'], 'edit') ) {
 		$poll = $spAdmin->setEdit($_POST);
 	}
 	
@@ -62,6 +62,8 @@
 		
 		<form method="post" id="polledit">
 			
+			<?php wp_nonce_field('edit', 'spcheck'); ?>
+
 			<p>
 				<h2><label for="question"><?php _e('Question'); ?></label></h2>
 				<input type="text" name="question" size="50" class="required" id="question" value="<?php
@@ -84,6 +86,7 @@
 						for( $i=1; $i<=$limit; ++$i ) {
 							$answer	= null;
 							$class	= null;
+							$vote   = null;
 							$votes	= null;
 							
 							if( isset($poll['answers'][$i]['answer']) )
@@ -120,8 +123,8 @@
 			<p>
 				<label for="answersother">Enable or Disable the "other" option, allowing a user to create their own answer:</label><br />
 				<select name="answersother" id="answersother">
-					<option value="0"<?php echo ($poll['answersother'] == '0' ? ' selected="selected"' : ''); ?>>Disabled</option>
-					<option value="1"<?php echo ($poll['answersother'] == '1' ? ' selected="selected"' : ''); ?>>Enabled</option>
+					<option value="0"<?php echo (isset($poll['answersother']) && $poll['answersother']== '0' ? ' selected="selected"' : ''); ?>>Disabled</option>
+					<option value="1"<?php echo (isset($poll['answersother']) && $poll['answersother'] == '1' ? ' selected="selected"' : ''); ?>>Enabled</option>
 				</select>
 			</p>
 			
