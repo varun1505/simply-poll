@@ -223,7 +223,7 @@ class SimplyPoll {
 
 	/*************************************************************************/
 
-
+ 
 	/**
 	 * Get Latest
 	 * Gets the Latest poll question

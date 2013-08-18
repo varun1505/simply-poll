@@ -88,7 +88,7 @@ class SimplyPollDB {
 	 * Grab poll data from DB
 	 *
 	 * @param	int		$id
-	 * @return	array
+ 	 * @return	array
 	 *************************************************************************/
 	public function getPollDB($id=null) {
 		global $wpdb;
