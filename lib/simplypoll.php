@@ -49,6 +49,11 @@ class SimplyPoll {
 
 		if( isset($args['id']) ) {
 			$pollid		= $args['id'];
+			if($args['id'] == "latest"){
+				$poll = $this->getLatest();
+			} else {
+				$poll = $this->grabPoll($pollid);
+			}
 			$poll		= $this->grabPoll($pollid);
 			
 			if( isset($poll['question']) ) {
@@ -214,6 +219,27 @@ class SimplyPoll {
 	 */
 	public function grabString($string) {
 
+	}
+
+	/*************************************************************************/
+
+
+	/**
+	 * Get Latest
+	 * Gets the Latest poll question
+	 *
+	 * @param int $id
+	 * @return array
+	 */
+	public function getLatest(){
+
+		$poll = $this->pollDB->getLatestPoll($id); // get the results from the the DB
+		if (isset($poll[0])) {
+			$poll = $poll[0];
+			$poll['answers'] = unserialize($poll['answers']);
+		}
+		//print_r($poll);
+		return $poll;
 	}
 	
 

@@ -216,4 +216,25 @@ class SimplyPollDB {
 		return $wpdb->query($sql);
 		
 	}
+
+	/**
+	 * Return the Latest Poll
+	 * 
+	 * @return	array
+	 *************************************************************************/
+	public function getLatestPoll(){
+		global $wpdb;
+		$sql = '
+				SELECT
+					*
+				FROM
+					`'.SP_TABLE.'`
+				WHERE
+					`id`	= (SELECT max(id) FROM`'.SP_TABLE.'`) 
+			';
+		$data = $wpdb->get_results($sql, ARRAY_A);
+			
+		return $data;
+	}
+
 }
